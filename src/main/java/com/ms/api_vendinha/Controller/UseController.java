@@ -1,12 +1,17 @@
 package com.ms.api_vendinha.Controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ms.api_vendinha.domain.dto.UserRequestDto;
+import com.ms.api_vendinha.domain.dto.UserResponseDto;
+import com.ms.api_vendinha.domain.services.UserServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
 public class UseController {
+
+    @Autowired
+    public UserServiceInterface userServiceInterface;
 
     @PostMapping("/user")
     public String save(){
@@ -14,4 +19,8 @@ public class UseController {
 
     }
 
+    @PostMapping("/usuario")
+    public UserResponseDto save(@RequestBody UserRequestDto userRequestDto){
+        return this.userServiceInterface.save(userRequestDto);
+    }
 }
